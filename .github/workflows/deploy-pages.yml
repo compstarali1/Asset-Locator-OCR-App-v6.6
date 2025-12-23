@@ -1,1 +1,23 @@
+name: Deploy to GitHub Pages
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # If you need a build step (npm/hugo/etc), add it here.
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './'   # change to './docs' if your site files live in docs/
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
