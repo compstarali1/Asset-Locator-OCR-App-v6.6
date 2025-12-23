@@ -12,12 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # If you need a build step (npm/hugo/etc), add it here.
+      # If you need to build (npm/hugo/etc) add build steps here.
+      # This workflow publishes the repository root. If your site files are in ./docs change the upload path below.
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './'   # change to './docs' if your site files live in docs/
+          path: './'
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
