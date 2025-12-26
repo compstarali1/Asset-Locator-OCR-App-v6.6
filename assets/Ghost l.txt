@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=0.8" name="viewport"/>
-<title>Asset Locator + OCR + TTS + Media Gallery</title>
-<script src="assets/tesseract.min.js"></script>
-<script src="assets/html2canvas.min.js"></script>
 <style>
 /* --- FIX MOBILE DRAGGING --- */
 
@@ -1044,6 +1039,303 @@ body.light .fixed-btn::after {
 </dl>
 <dl>
 </dl>
+<h3><p>C.W Companion</p></h3><p><h1><span style="color: #FEFEFE"></span></h1></p>Asset Locator OCR
+<img id="topLogo" src="assets/toplogo.gif"/>
+<div class="card flex-row" style="justify-content:center;">
+<label class="tiny-btn" for="fileInput" style="
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;">
+<img alt="Open Image" src="assets/cw.webp" style="width:180px;height:auto;border-radius:12px;box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</label>
+<input accept="image/*" id="fileInput" style="display:none;" type="file"/>
+<button id="clearBtn" style="
+  background: none;
+  border: none;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  position: right;
+  top: 5px;
+  right: 15px;
+  cursor: pointer;">
+<img alt="Theme" src="assets/clear.gif" style="width:100%;height:100%;border-radius:16px;box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</button>
+</div>
+<div class="card">
+<h3>OCR Preview</h3>
+<div "+button"="" 'no="" [+buttons]="When" appear="" asset="" buttons'...<="" buttons.="" data="No" div="" generate="" here,="" id="ocrPreview" in="" numbers="" ocr="" press="" remember="" results="" the="" to="">
+<div id="ocrLoader"></div>
+</div>
+<div class="card flex-col" style="align-items:center;">
+<textarea id="inputText" placeholder="OCR Results + Or Add more Fleet numbers manually...." style="width:90%;"></textarea>
+<button id="generateBtn" style="
+      background:none;
+      border:none;
+      padding:0;
+      width:80px;
+      height:80px;
+      cursor:pointer;">
+<img alt="Generate" src="assets/gen.webp" style="width:100%;height:100%;border-radius:16px;
+           box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</button>
+<button id="insertOCRBtn" style="
+      background:none;
+      border:none;
+      padding:0;
+      width:120px;
+      height:120px;
+      cursor:pointer;">
+<img alt="InsertOCR" src="assets/add.webp" style="width:100%;height:100%;border-radius:16px;
+           box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</button>
+<div style="
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;">
+<button id="ttsBtn" style="
+        background:none;
+        border:none;
+        padding:0;
+        width:70px;
+        height:70px;
+        cursor:pointer;">
+<img alt="🔈Read" src="assets/tts.png" style="width:100%;height:100%;border-radius:16px;
+             box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</button>
+<button id="pauseBtn" style="
+        background:none;
+        border:none;
+        padding:0;
+        width:60px;
+        height:10px;
+        font-size:1.8em;
+        color:#00ffff;
+        cursor:pointer;">⏸️</button>
+</div>
+</div>
+</div>
+<h2>Preview</h2>
+<div id="operatorTitle">Abellio</div>
+<div id="previewContainer"><iframe id="viewerIframe"></iframe></div>
+<div class="operator-track">
+<button class="operatorBtn active" data-color="#ef4444" data-name="Abellio" data-template="https://lvf.io/#LDN|TL">Abellio</button>
+<button class="operatorBtn" data-color="#2563eb" data-name="Go-Ahead" data-template="https://lvf.io/#LDN|GAL">Go-Ahead</button>
+<button class="operatorBtn" data-color="#f97316" data-name="Stagecoach" data-template="https://lvf.io/#LDN|SLN">Stagecoach</button>
+<button class="operatorBtn" data-color="#991b1b" data-name="Metroline" data-template="https://lvf.io/#LDN|ML">Metroline</button>
+<button class="operatorBtn" data-color="#06b6d4" data-name="Arriva" data-template="https://lvf.io/#LDN|AL">Arriva</button>
+</div>
+<div class="card">
+<h3>Generated Buttons</h3>
+<div id="buttonsContainer"></div>
+</div>
+<div class="card">
+<h3>Extracted Fleet Numbers</h3>
+<div id="resultsBox">No results yet.</div>
+<div style="text-align:center;">
+<button id="exportTxtBtn" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.25)'" style="
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+padding:16px 28px;
+font-size:20px;
+font-weight:700;
+background:#45004F40;
+border:2px solid black;
+border-radius:12px;
+color:transparent;
+background-clip:text;
+-webkit-background-clip:text;
+text-fill-color:transparent;
+-webkit-text-fill-color:transparent;
+background-image:linear-gradient(45deg, purple, #8AB7E3);
+box-shadow:4px 8px 20px rgba(0,255,0,0.5);
+cursor:pointer;
+margin-top:20px;
+transition:transform 0.5s ease;
+flex-wrap:wrap;
+">
+<div style="display:flex;flex-direction:column;align-items:center;line-height:1.1;">
+<h2 style="margin:0;font-size:22px;">Export As Text</h2>
+<h4 style="margin:0;font-size:15px;">Clockwork_[date].txt</h4>
+</div>
+<img alt="Download" src="assets/dldown.png" style="width:70px;height:80px;object-fit:contain;"/>
+</button>
+</div>
+<div style="text-align:center;"><button id="copyBtn">Copy Fleet Numbers</button></div>
+<div style="text-align:center;"><button id="exportImgBtn">Export Preview</button></div>
+</div>
+</div>
+<div class="bottom-nav">
+<button class="nav-btn" onclick="scrollToSection('ocrPreview')">OCR</button>
+<button class="nav-btn" onclick="scrollToSection('inputText')">Input</button>
+<button class="nav-btn" onclick="scrollToSection('buttonsContainer')">Fleet</button>
+<button class="nav-btn" onclick="scrollToSection('previewContainer')">Preview</button>
+</div>
+<div id="mediaModal">
+<div id="menuModal"></div>
+<div id="selectedModal">
+<button id="closeModal"></button>
+<img alt="Model Image" id="modelImage" src="jfs.png"/>
+<button id="modalPrev"></button>
+<button id="modalNext"></button>
+<button id="modalShare"></button>
+</div>
+</div>
+<button class="" id=""></button>
+<button class="fixed-btn" data-title="Login" id="loginnRefBtn" style="background:none;border:none;padding:0;width:90px;height:90px;position:fixed;top:15px;right:28%;z-index:101;cursor:pointer;">
+<img alt="Login Reference" src="assets/login.webp" style="width:100%;height:100%;border-radius:16px;box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</button>
+<div class="ref-modal" id="loginnRefModal">
+<div class="ref-modal-content">
+<span class="close">×</span>
+<div id="buttonBar" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:10px;">
+<button class="action-btn green-btn" id="editSaveBtn">Edit</button>
+<button class="action-btn" id="insertImgBtn">Insert Image</button>
+<button class="action-btn red-btn" id="clearAllBtn">Clear All</button>
+<button class="action-btn" id="exitBtn">Exit</button>
+<button class="action-btn yellow-btn" id="undoBtn">Undo</button>
+<button class="action-btn yellow-btn" id="redoBtn">Redo</button>
+<button class="action-btn blue-btn" id="exportBtn">Export PDF</button>
+<input accept="image/*" id="imgInput" style="display:none;" type="file"/>
+</div>
+<div id="notebookContainer">
+<div contenteditable="false" id="notebook"></div>
+</div>
+</div>
+</div>
+
+<style>
+.ref-btn {
+  position:absolute; 
+  top:12px; 
+  width:90px; 
+  height:90px;
+  background-image: url('assets/login.webp'); /* ← add this */
+  background-size:cover; 
+  background-position:center; 
+  background-repeat:no-repeat;
+  border:3px solid #00bcd4; 
+  border-radius:12px; 
+  cursor:pointer; 
+	z-index: 100;
+  transition:0.3s;
+  right:25%;
+}
+
+.ref-btn:hover { filter: brightness(1.1); }
+
+.ref-modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.7); }
+.ref-modal-content { display:flex; flex-direction:column; position:relative; background:#fff; margin:10px auto; padding:5px; border-radius:12px;
+  width:98%; height:90%; max-width:98%; box-shadow:5px 10px 30px rgba(0,0,0,0.5); }
+.close { color:#000; font-size:38px; font-weight:bold; cursor:pointer; }
+.close:hover { color:red; }
+
+.action-btn {
+  flex:1 1 auto; min-width:100px; padding:20px; font-size:18px;
+  border:none; border-radius:12px; font-weight:bold; box-shadow:5px 5px 10px #888, -5px -5px 10px #fff;
+  cursor:pointer; transition:all 0.2s ease; color:#fff;
+}
+.green-btn { background:linear-gradient(145deg,#4CAF50,#388E3C); }
+.red-btn { background:linear-gradient(145deg,#F44336,#D32F2F); }
+.yellow-btn { background:linear-gradient(145deg,#FFEB3B,#FBC02D); color:#000; }
+.blue-btn { background:linear-gradient(145deg,#2196F3,#1976D2); }
+.action-btn:hover { filter: brightness(1.1); transform: translateY(1px); }
+.action-btn:active { transform: translateY(2px); box-shadow: inset 2px 2px 5px #555, inset -2px -2px 5px #fff; }
+
+#notebookContainer { flex:1; overflow:auto; margin-top:5px; }
+#notebook {
+  width:100%; height:100%; padding:15px; overflow:auto;
+  border:1px solid #ccc; border-radius:8px;
+  background: repeating-linear-gradient(to bottom,#fff8dc,#fff8dc 29px,#3D1C48 30px);
+  font-family:'Courier New', monospace; font-size:20px; line-height:30px; white-space:pre-wrap;
+  outline:none; position:relative;
+}
+.img-wrapper { position:absolute; display:inline-block; }
+.img-wrapper img { max-width:150px; border:5px solid #888; border-radius:4px; touch-action:none; }
+.handle {
+  width:50px; height:45px; background:#00bcd4; color:#fff; font-weight:bold;
+  text-align:center; line-height:25px; border-radius:50%; font-size:18px;
+  position:absolute; bottom:-10px; right:-10px; cursor:grab; user-select:none; z-index:1000;
+}
+/* === FINAL NEON THEME OVERRIDE (MUST BE LAST) === */
+body.dark .card {
+  background: rgba(10, 20, 40, 0.9);
+  border: 1px solid rgba(0, 255, 213, 0.3);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25), inset 0 0 8px rgba(0, 255, 213, 0.15);
+  color: #ccfaff;
+  transition: all 0.4s ease;
+}
+
+body.light .card {
+  background: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 14px rgba(0, 180, 255, 0.15);
+  color: #111;
+  transition: all 0.4s ease;
+}
+
+#themeBtn {
+  background: linear-gradient(145deg, #00ffff, #0072ff);
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  animation: neonPulse 2.5s infinite alternate;
+  transition: all 0.3s ease;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+body.light #themeBtn {
+  background: linear-gradient(145deg, #555, #999);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  animation: none;
+}
+</style>
+<body class="dark">
+<div class="viz"></div>
+<div class="viz canvas">❄️❄️❄️</div>
+<body>
+<div class="btn-3d" id="openBtn">.......BG REMOVER</div>
+<div class="overlay" id="overlay">
+<div class="iframe-container">
+<div class="close-btn" id="closeBtn">×</div>
+<iframe src="assets/bg-rem.html"></iframe>
+</div>
+</div>
+<div class="parallax-layer parallax-top"></div>
+<div class="parallax-layer parallax-mid"></div>
+<div class="parallax-layer parallax-bottom"></div>
+<button class="fixed-btn" data-title="Media" id="mediaBtn" style="background:none;border:none;padding:0;width:90px;height:90px;position:fixed;top:12px;left:12px;z-index:101;cursor:pointer;">
+<img alt="Media Menu" src="assets/info.webp" style="width:100%;height:100%;border-radius:16px;box-shadow:0 4px 8px #A94FCC50;"/>
+</button>
+<button class="fixed-btn" data-title="Theme" id="themeBtn" style="background:none;border:none;padding:0;width:90px;height:90px;position:fixed;top:12px;right:10px;z-index:101;cursor:pointer;">
+<img alt="Theme" src="assets/theme.webp" style="width:100%;height:100%;border-radius:16px;box-shadow:0 4px 12px #5D714750;"/>
+</button>
+<div class="container">
+<dl>
+</dl>
+<dl>
+</dl>
+<button class="fixed-btn" data-title="Garage" id="garageRefBtn" style="background:none;border:none;padding:0;width:90px;height:90px;position:fixed;top:12px;left:28%;z-index:101;cursor:pointer;">
+<img alt="Garage Reference" src="assets/depot.gif" style="width:100%;height:100%;border-radius:16px;box-shadow:0 4px 12px rgba(0,255,255,.3);"/>
+</button>
+
 <h3><p>C.W Companion</p></h3><p><h1><span style="color: #FEFEFE"></span></h1></p>Asset Locator OCR
 <img id="topLogo" src="assets/toplogo.gif"/>
 <div class="card flex-row" style="justify-content:center;">
